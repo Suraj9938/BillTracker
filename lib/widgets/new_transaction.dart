@@ -42,8 +42,10 @@ class _NewTransactionState extends State<NewTransaction> {
               keyboardType: TextInputType.number,
             ),
             RaisedButton(
-              child: Text("Add Product"),
-              color: Colors.blue,
+              child: Text(
+                "Add Product",
+              ),
+              color: Theme.of(context).accentColor,
               textColor: Colors.white,
               onPressed: () {
                 _submitData();
