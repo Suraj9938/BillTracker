@@ -12,7 +12,20 @@ class Chart extends StatelessWidget {
     return List.generate(7, (index) {
       final weekDay = DateTime.now().subtract(Duration(days: index));
       double totalSum = 0.0;
+      for (int i = 0; i < recentTransactions.length; i++) {
+        if (recentTransactions[i].date.day == weekDay.day &&
+            recentTransactions[i].date.month == weekDay.month &&
+            recentTransactions[i].date.year == weekDay.year) {
+          totalSum += recentTransactions[i].amount;
+        }
+      }
       return {'day': DateFormat.E().format(weekDay), 'amount': totalSum};
+    }).reversed.toList();
+  }
+
+  double get totalSpendAmount {
+    return groupedExpenses.fold(0.0, (sum, item) {
+      return sum + item['amount'];
     });
   }
 
@@ -25,7 +38,16 @@ class Chart extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: groupedExpenses.map((tx) {
-            return ChartBar();
+            return Flexible(
+              fit: FlexFit.tight,
+              child: ChartBar(
+                day: tx['day'],
+                spendamount: tx['amount'],
+                spendPercent: totalSpendAmount == 0.0
+                    ? 0.0
+                    : (tx['amount'] as double) / totalSpendAmount,
+              ),
+            );
           }).toList(),
         ),
       ),

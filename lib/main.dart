@@ -3,7 +3,6 @@ import 'package:bill_tracker/widgets/chart.dart';
 import 'package:bill_tracker/widgets/new_transaction.dart';
 import 'package:bill_tracker/widgets/transaction_list.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 void main() => runApp(MyApp());
 
@@ -40,9 +39,9 @@ class BillPage extends StatefulWidget {
 
 class _BillPageState extends State<BillPage> {
   List<Transaction> _userTransaction = [
-    Transaction(title: "Groceries", amount: 50.00, date: DateTime.now()),
-    Transaction(title: "Watch", amount: 100.00, date: DateTime.now()),
-    Transaction(title: "Shoes", amount: 120.00, date: DateTime.now()),
+//    Transaction(title: "Groceries", amount: 50.00, date: DateTime.now()),
+//    Transaction(title: "Watch", amount: 100.00, date: DateTime.now()),
+//    Transaction(title: "Shoes", amount: 120.00, date: DateTime.now()),
   ];
 
   String title;
@@ -58,9 +57,8 @@ class _BillPageState extends State<BillPage> {
     }).toList();
   }
 
-  void _addTransaction(String txTitle, double txAmount) {
-    final newTx =
-        Transaction(title: txTitle, amount: txAmount, date: DateTime.now());
+  void _addTransaction(String txTitle, double txAmount, DateTime txDate) {
+    final newTx = Transaction(title: txTitle, amount: txAmount, date: txDate);
 
     setState(() {
       _userTransaction.add(newTx);
